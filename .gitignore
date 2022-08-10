@@ -1,1 +1,6 @@
 youtube/
+*.depend
+*.layout
+*.cbp
+*.exe
+*.o
