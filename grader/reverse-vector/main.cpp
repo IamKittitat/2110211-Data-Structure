@@ -3,13 +3,14 @@
 using namespace std;
 void reverse(vector<int> &v,int a,int b) {
 //write your code only in this function
-    vector<int> tmp;
-    for(int i = a; i<=b;i++){
-        tmp.push_back(v[i]);
-    }
-    for(int i = a;i<=b;i++){
-        v[i] = tmp[tmp.size()-1];
-        tmp.pop_back();
+    auto lhs = v.begin()+a;
+    auto rhs = v.begin()+b;
+    while(lhs < rhs){
+        int tmp = *lhs;
+        *lhs = *rhs;
+        *rhs = tmp;
+        lhs++;
+        rhs--;
     }
 }
 int main() {
