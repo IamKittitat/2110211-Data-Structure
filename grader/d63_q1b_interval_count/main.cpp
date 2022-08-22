@@ -19,6 +19,7 @@ int main()
         cin >> tmp;
         auto first_it = lower_bound(v.begin(),v.end(),tmp-k);
         auto last_it = lower_bound(v.begin(),v.end(),tmp+k);
+        if(last_it == v.end()) last_it--;
         if(*last_it > tmp+k) last_it--;
         cout << last_it - first_it + 1 << " ";
     }
