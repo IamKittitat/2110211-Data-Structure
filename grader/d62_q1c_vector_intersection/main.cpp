@@ -18,10 +18,8 @@ int main()
         s2.insert(ip);
     }
     for(int i =0;i<n;i++){
-        cout << "CHECK " << v1[i];
         if(s2.find(v1[i]) != s2.end()) {
             ans.insert(v1[i]);
-            cout << "ans " << endl;
         }
     }
     for (auto &x :ans){
