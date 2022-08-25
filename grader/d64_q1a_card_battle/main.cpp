@@ -17,7 +17,6 @@ int main()
         for (int j =0;j<r;j++){
             cin >> op;
             auto it = card.upper_bound(op);
-            cout << "CHECK " << it->first << " " << it->second << " " << op << endl;
             if(it == card.end()){
                 cout << ans;
                 exit(0);
@@ -27,5 +26,5 @@ int main()
         }
         ans++;
     }
-    cout << "End "<<ans;
+    cout << yns;
 }
