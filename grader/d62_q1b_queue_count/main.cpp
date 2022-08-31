@@ -5,9 +5,12 @@ using namespace std;
 size_t qcount(queue<int> q, int k)
 {
     size_t ans = 0;
-    while(!q.empty()){
-        if(q.front() == k) ans++;
-        q.pop();
+    queue<int> tmp_q = q;
+    int tmp;
+    while(!tmp_q.empty()){
+        tmp = tmp_q.front();
+        if(tmp == k) ans++;
+        tmp_q.pop();
     }
     return ans;
 }
