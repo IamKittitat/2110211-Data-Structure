@@ -14,17 +14,19 @@ int main()
         v1.push_back(tmp);
         if(i <= w) v2.push_back(v1[i]);
     }
+    sort(v2.begin(),v2.end());
     for(int i = 0; i< n - w ; i++){
-        sort(v2.begin(),v2.end());
-        //cout << "CHECK " << v[i] << endl;
-        //for(auto &x : v2) cout << "IN" << x << " " << endl;
         cout << v2[w/2] << " ";
-        for(int j = 0 ; j < v2.size();j++) {
+        cout << "CHECK " << v1[i] << endl;
+        // for(auto &x : v2) cout << "IN1 " << x << " " << endl;
+        /*for(int j = 0 ; j < v2.size();j++) {
             if(v2[j] == v1[i]){
                 v2.erase(v2.begin()+j);
                 break;
             }
-        }
-        if(i+w+1 < v1.size()) v2.push_back(v1[i+w+1]);
+        }*/
+        v2.erase(lower_bound(v2.begin(),v2.end(),v1[i]));
+        if(i+w+1 < v1.size()) v2.insert(lower_bound(v2.begin(),v2.end(),v1[i+w+1]),v1[i+w+1]);
+        // for(auto &x : v2) cout << "IN2" << x << " " << endl;
     }
 }
