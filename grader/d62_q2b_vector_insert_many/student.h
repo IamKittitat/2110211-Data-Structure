@@ -8,8 +8,8 @@ void CP::vector<T>::insert_many(CP::vector<std::pair<int,T>> data) {
   sort(data.begin(),data.end());
   T *newMData = new T[size()+data.size()];
   int idx = 0,idx2=0;
-  for(int i = 0 ;i<=mSize;i++){
-    if(data[idx].first == i){
+  for(size_t i = 0 ;i<=mSize;i++){
+    if((size_t)data[idx].first == i){
         newMData[idx2] = data[idx].second;
         idx++;
         idx2++;
