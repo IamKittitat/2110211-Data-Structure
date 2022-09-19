@@ -103,7 +103,7 @@ namespace CP{
              }
 
              void erase(iterator it){
-                while(it != end()){
+                while((it+1) != end()){
                     *it = *(it+1);
                     it++;
                 }
