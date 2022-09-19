@@ -18,7 +18,7 @@ namespace CP{
             }
 
             void expand(size_t capacity){
-                T *newMData = new T[capacity];
+                T *newMData = new T[capacity]();
                 for(size_t i = 0;i<mSize;i++){
                     newMData[i] = mData[i];
                 }
@@ -32,18 +32,18 @@ namespace CP{
             // Default Constructor
             stack(){
                 int cap = 1;
-                mData = new T[cap];
+                mData = new T[cap]();
                 mSize = 0;
                 mCap = cap;
             }
 
             // copy constructor
             stack(const CP::stack<T> &a){
-                mData = new T[a.mCap];
+                mData = new T[a.mCap]();
                 mSize = a.mSize;
                 mCap = a.mCap;
                 for(size_t i = 0;i<a.size();i++){
-                    mData[i] = a.mData[i];
+                    mData[i] = a[i];
                 }
             }
 
