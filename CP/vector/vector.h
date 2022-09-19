@@ -20,7 +20,7 @@ namespace CP{
                 }
             }
             void expand(size_t s){
-                T *newMData = new T[s];
+                T *newMData = new T[s]();
                 for(size_t i = 0;i<mSize;i++){
                     newMData[i] = mData[i];
                 }
@@ -38,19 +38,19 @@ namespace CP{
             // default constructor
             vector(){
                 int cap = 1;
-                mData = new T[cap];
+                mData = new T[cap]();
                 mCap = cap;
                 mSize = 0;
             }
             // constructor with initial size
             vector(size_t n){
-                mData = new T[n];
+                mData = new T[n]();
                 mCap = n;
                 mSize = n;
             }
             // copy constructor
             vector(vector<T> &other){
-                mData = new T[other.capacity()];
+                mData = new T[other.capacity()]();
                 mCap = other.capacity();
                 mSize = other.size();
                 for(size_t i = 0 ; i < mSize;i++){
