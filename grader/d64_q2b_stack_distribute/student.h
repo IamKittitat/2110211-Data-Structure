@@ -13,7 +13,6 @@ std::vector<std::vector<T>> CP::stack<T>::distribute(size_t k) const {
         } else{
             si = (idx+1)/k;
         }
-        std::cout << idx << " " << si << std::endl;
         k--;
         std::vector<T> subans;
         for(int i = 0 ; i < si ; i++){
