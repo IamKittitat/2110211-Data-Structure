@@ -10,6 +10,17 @@ namespace CP{
         public:
             // Default Constructor
             stack(): v(){};
+            // Copy Constructor
+            stack(const CP::stack<T> &a){
+                v = a.v;
+            }
+            // copy assignment operator
+            stack<T>& operator=(CP::stack<T> a){
+                using std::swap;
+                swap(v,a.v);
+                return *this;
+            }
+
             // Capacity Function
             bool empty() const {return v.empty();}
             size_t size() const {return v.size();}

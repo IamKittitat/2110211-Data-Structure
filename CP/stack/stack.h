@@ -43,7 +43,7 @@ namespace CP{
                 mSize = a.mSize;
                 mCap = a.mCap;
                 for(size_t i = 0;i<a.size();i++){
-                    mData[i] = a[i];
+                    mData[i] = a.mData[i];
                 }
             }
 

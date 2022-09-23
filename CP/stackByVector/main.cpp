@@ -1,30 +1,45 @@
 #include <iostream>
 #include <stack>
-#include "stackByVector.h"
 #include <assert.h>
-#include <exception>
+#include "stackByVector.h"
 
-
-//typedef CP::stack<int> Stack;
-//
 typedef CP::stack<int> Stack;
+using namespace std;
+
+
+bool test0() {
+  //pop
+  Stack s;
+
+  cout << s.size() << " " << s.empty() << endl;
+  s.push(10);
+  cout << s.size() << " " << s.empty() << endl;
+  s.pop();
+  cout << s.size() << " " << s.empty() << endl;
+
+  return true;
+}
+
 
 bool test1() {
-  Stack s;
-  assert(s.size() == 0);
-
-  s.push(1);
-  s.push(2);
-  s.push(3);
-  s.push(3);
-
-  assert(s.top() == 3 && s.size() == 4); s.pop();
-  assert(s.top() == 3 && s.size() == 3); s.pop();
-  assert(s.top() == 2 && s.size() == 2); s.pop();
-  assert(s.top() == 1 && s.size() == 1); s.pop();
-
-  assert(s.size() == 0);
-
+  CP::stack<string> s;
+  s.push("somchai");
+  s.push("vishnu");
+  s.push("nuttapong");
+  s.push("nattee");
+  cout << s.size() << " " << s.empty() << endl;
+  cout << s.top() << endl;
+  s.pop();
+  cout << s.size() << " " << s.empty() << endl;
+  cout << s.top() << endl;
+  s.pop();
+  cout << s.size() << " " << s.empty() << endl;
+  cout << s.top() << endl;
+  s.pop();
+  cout << s.size() << " " << s.empty() << endl;
+  cout << s.top() << endl;
+  s.pop();
+  cout << s.size() << " " << s.empty() << endl;
   return true;
 }
 
@@ -38,17 +53,10 @@ bool test2() {
   s.pop();
 
   Stack s2 = s;
+  cout << s.size() << " " << s.empty() << endl;
+  cout << s2.size() << " " << s2.empty() << endl;
 
-  try {
-    int x = s.top();
-    //we should get exception here
-    std::cout << "x = " << x << std::endl;
-    s.pop();
-  } catch (std::exception &e) {
-    std::cout << "Caught an exception " << e.what() << std::endl;
-    return true;
-  }
-  return false;
+  return true;
 }
 
 bool test3() {
@@ -66,12 +74,93 @@ bool test3() {
   return true;
 }
 
+bool test4() {
+  Stack s;
+  s.push(1);
+  s.push(2);
+  s.push(3);
+  s.push(4);
+  s.pop();
+  s.pop();
+  Stack s2(s);
+  while (!s2.empty()) {
+    cout << s2.top() << endl;
+    s2.pop();
+  }
+  cout << s.size() << " " << s.empty() << endl;
+  cout << s2.size() << " " << s2.empty() << endl;
+
+  return true;
+}
+bool test5() {
+  int n = 1000;
+  Stack s1;
+  for (int i = 0;i < n;i++) { s1.push(i); }
+  for (int i = 0;i < n/2;i++) { s1.pop(); }
+  Stack s2 = s1;
+  while (!s1.empty()) { s1.pop(); }
+  Stack s3(s1);
+
+  cout << s1.size() << " " << s1.empty() << endl;
+  cout << s2.size() << " " << s2.empty() << s2.top() << endl;
+  cout << s3.size() << " " << s3.empty() << endl;
+  return true;
+}
+
+bool test6() {
+  int n = 1000000;
+  Stack s1;
+  for (int i = 0;i < n;i++) { s1.push(i); }
+  for (int i = 0;i < n/2;i++) { s1.pop(); }
+  Stack s2(s1);
+  while (!s1.empty()) { s1.pop(); }
+  Stack s3(s1);
+
+  cout << s1.size() << " " << s1.empty() << endl;
+  cout << s2.size() << " " << s2.empty() << s2.top() << endl;
+  cout << s3.size() << " " << s3.empty() << endl;
+  return true;
+}
+
+bool test7() {
+  int n = 10000000;
+  Stack s1;
+  for (int i = 0;i < n;i++) { s1.push(i); }
+  for (int i = 0;i < n/2;i++) { s1.pop(); }
+  Stack s2(s1);
+  while (!s1.empty()) { s1.pop(); }
+  Stack s3(s1);
+
+  cout << s1.size() << " " << s1.empty() << endl;
+  cout << s2.size() << " " << s2.empty() << s2.top() << endl;
+  cout << s3.size() << " " << s3.empty() << endl;
+  return true;
+}
+
+bool test8() {
+  return true;
+}
+
+bool test9() {
+  return true;
+}
 int main() {
-  if (test1()) std::cout << "---------------------------------------- Test1 OK!" << std::endl;
-  if (test2()) std::cout << "---------------------------------------- Test2 OK!" << std::endl;
-  if (test3()) std::cout << "---------------------------------------- Test3 OK!" << std::endl;
-//  if (test3()) std::cout << "---------------------------------------- Test4 OK!" << std::endl;
+  int test_case;
+  while(true){
 
-
+  std::cin >> test_case;
+  switch(test_case) {
+    case 0: if (test0()) std::cout << "0OK" << std::endl; ;
+    case 1: if (test1()) std::cout << "1OK" << std::endl; ;
+    case 2: if (test2()) std::cout << "2OK" << std::endl; ;
+    case 3: if (test3()) std::cout << "3OK" << std::endl; ;
+    case 4: if (test4()) std::cout << "4OK" << std::endl; ;
+    case 5: if (test5()) std::cout << "5OK" << std::endl; ;
+    case 6: if (test6()) std::cout << "6OK" << std::endl; ;
+    case 7: if (test7()) std::cout << "7OK" << std::endl; ;
+    case 8: if (test8()) std::cout << "8OK" << std::endl; ;
+    case 9: if (test9()) std::cout << "9OK" << std::endl; ;
+  }
+}
   return 0;
 }
