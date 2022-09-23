@@ -88,9 +88,20 @@ bool test4() {
     }
 }
 int main() {
-  if (test1()) std::cout << "---------------------------------------- Test1 OK!" << std::endl;
-  if (test2()) std::cout << "---------------------------------------- Test2 OK!" << std::endl;
-  if (test3()) std::cout << "---------------------------------------- Test3 OK!" << std::endl;
-  if (test4()) std::cout << "---------------------------------------- Test4 OK!" << std::endl;
-  return 0;
+    CP::queue<int> cpq;
+    cpq.push(2);
+    cpq.push(3);
+    cpq.push_front(1);
+    cpq.push_front(0);
+    cpq.push_front(-1);
+    cpq.push_front(-2);
+    cpq.push_front(-3);
+    cpq.pop();
+    cpq.pop_back();
+    std::cout << cpq.front() << " " << cpq.back() << std::endl;
+    if (test1()) std::cout << "---------------------------------------- Test1 OK!" << std::endl;
+    if (test2()) std::cout << "---------------------------------------- Test2 OK!" << std::endl;
+    if (test3()) std::cout << "---------------------------------------- Test3 OK!" << std::endl;
+    if (test4()) std::cout << "---------------------------------------- Test4 OK!" << std::endl;
+    return 0;
 }

@@ -84,9 +84,22 @@ namespace CP{
                 mSize++;
             }
 
+            void push_front(const T &element){
+                ensureCapacity(mSize+1);
+                mFront = (mFront-1+mCap)%mCap;
+                mData[mFront] = element;
+                mSize++;
+
+            }
+
             void pop(){
                 if (size() == 0) throw std::out_of_range("index of out range") ;
                 mFront = (mFront+1)%mCap;
+                mSize--;
+            }
+
+            void pop_back(){
+                if (size() == 0) throw std::out_of_range("index of out range") ;
                 mSize--;
             }
 
