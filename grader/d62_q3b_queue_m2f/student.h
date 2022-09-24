@@ -11,7 +11,6 @@ void CP::queue<T>::move_to_front(size_t pos) {
     newMData[0] = mData[(mFront+pos)%mCap];
     int idx = 1;
     for(int i = 0;i<mSize;i++){
-        std::cout << "CHECK " << i << " " << mData[(mFront+i)%mCap] << std::endl;
         if(i != pos){
             newMData[idx++] = mData[(mFront+i)%mCap];
         }
