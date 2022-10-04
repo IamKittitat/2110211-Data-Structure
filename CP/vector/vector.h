@@ -166,6 +166,19 @@ namespace CP{
                 }
                 return -1;
              }
+
+             void unique(){
+                T *newMData = new T[mCap]();
+                int idx = 0;
+                for(int i = 0; i<mSize;i++){
+                    if(i==0 || (i>=1 && mData[i] != mData[i-1])){
+                        newMData[idx++] = mData[i];
+                    }
+                }
+                delete [] mData;
+                mData = newMData;
+                mSize = idx;
+             }
     };
 }
 #endif // CP_VECTOR
