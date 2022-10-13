@@ -9,20 +9,15 @@ template <typename T>
 void CP::vector<T>::uniq() {
   //do someting here
     std::set<T> s;
-    for(int i = 0 ; i < mSize;i++) s.insert(mData[i]);
-    T *newMData = new T[s.size()];
+    T *arr = new T[mSize];
     int idx=0;
-    int newSize = s.size();
-    for(int i =0 ;i<mSize;i++){
-        if(s.find(mData[i]) != s.end()){
-            newMData[idx] = mData[i];
-            s.erase(mData[i]);
-            idx++;
-        }
+    for(int i =0;i<mSize;i++){
+        if(s.find(mData[i]) == s.end()) arr[idx++] = mData[i];
+        s.insert(mData[i]);
     }
     delete [] mData;
-    mData = newMData;
-    mSize = newSize;
+    mData = arr;
+    mSize = idx;
     mCap = mSize;
 }
 

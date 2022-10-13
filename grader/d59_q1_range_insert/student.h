@@ -5,30 +5,19 @@
 template <typename T>
 void CP::vector<T>::insert(iterator position,iterator first,iterator last) {
   //write your code here
-  T *newMData = new T[mSize + (last-first)];
-  int newSize = mSize + (last-first);
-  int idx = 0;
-  auto i = begin();
-  while(i!=position){
-    newMData[idx] = *i;
-    idx++;
-    i++;
-  }
-
+  T *arr = new T[mSize+last-first];
+  int idx=0;
+  for(int i = 0 ; i < position-begin();i++) arr[idx++] = mData[i];
   while(first != last){
-    newMData[idx] = *first;
+    arr[idx++] = *first;
     first++;
-    idx++;
   }
-  while(i != end()){
-    newMData[idx] = *i;
-    idx++;
-    i++;
-  }
+  for(int i = position-begin(); i < mSize;i++) arr[idx++] = mData[i];
+
   delete []mData;
-  mData = newMData;
-  mSize = newSize;
-  mCap = newSize;
+  mData = arr;
+  mSize = idx;
+  mCap = mSize;
 }
 
 #endif

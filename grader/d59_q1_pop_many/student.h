@@ -13,15 +13,14 @@ std::stack<T> CP::stack<T>::remove_top(size_t K) {
   //write your code here
   //
   //don't forget to return an std::stack
-    std::stack<T> tmp1;
+    std::stack<T> tmp,ans;
     while(!empty() && K--){
-        tmp1.push(top());
+        tmp.push(top());
         pop();
     }
-    std::stack<T> ans;
-    while(!tmp1.empty()){
-        ans.push(tmp1.top());
-        tmp1.pop();
+    while(!tmp.empty()){
+        ans.push(tmp.top());
+        tmp.pop();
     }
     return ans;
 }

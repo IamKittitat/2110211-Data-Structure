@@ -4,23 +4,17 @@
 template <typename T>
 std::vector<std::vector<T>> CP::stack<T>::distribute(size_t k) const {
   //write your code here
-    std::vector<std::vector<T>> ans;
-    int idx = size()-1;
-    int si;
-    while(idx >= 0){
-        if((idx+1)%k != 0){
-            si = (idx+1)/k + 1;
-        } else{
-            si = (idx+1)/k;
+    std::vector<std::vector<T>> v(k);
+    int si = 0,idx=0,k2=0;
+    for(int i = 0;i<k;i++){
+        si = (mSize-idx)/(k-k2);
+        if((mSize-idx)%(k-k2) != 0) si++;
+        for(int j=0;j<si;j++){
+            v[i].push_back(mData[mSize-1-idx]);
+            idx++;
         }
-        k--;
-        std::vector<T> subans;
-        for(int i = 0 ; i < si ; i++){
-            subans.push_back(mData[idx]);
-            idx--;
-        }
-        ans.push_back(subans);
+        k2++;
     }
-    return ans;
+    return v;
 }
 #endif

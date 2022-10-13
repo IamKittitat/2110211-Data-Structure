@@ -5,10 +5,11 @@ template <typename T>
 void CP::vector<T>::compress() {
     //write your code here
     T *newMData = new T[mSize];
-    for(int i = 0 ; i < mSize;i++){
-        newMData[i] = mData[i];
+    int idx=0;
+    for(int i=0;i<mSize;i++){
+        newMData[idx++] = mData[i];
     }
-    delete []mData;
+    delete [] mData;
     mData = newMData;
     mCap = mSize;
 }

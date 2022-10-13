@@ -4,27 +4,18 @@
 template <typename T>
 bool CP::vector<T>::block_swap(iterator a, iterator b, size_t m) {
   //write your code here
-    if(begin() <= a && a < end() && begin() <= b && b < end() && begin() <= a+m-1 && a+m-1 < end() && begin() <= b+m-1 && b+m-1 < end() && (a+m-1 < b || b+m-1 < a) && m > 0){
-        CP::vector<T> v_tmp(m);
-        int idx = 0;
-        for(auto it = a;it!=a+m;it++,idx++){
-            v_tmp[idx] = *it;
-            // std::cout << *it << " ";
-            *it = *(b+idx);
-            // std::cout << *(b+(it-begin())) << " ";
-            // std::cout << *it << std::endl;
+    if(m>0 && mData <= a && a < mData+mSize && mData <= b && b < mData+mSize && mData <= a+m-1 && a+m-1 < mData+mSize && mData <= b+m-1 && b+m-1 < mData+mSize && ((a<b && a+m-1<b) || (b<a && b+m-1<a))){
+        vector<T> v;
+        for(int i = 0;i<m;i++){
+            v.push_back(*(b+i));
+            *(b+i) = *(a+i);
         }
-        // for(auto &x : *this) std::cout << x << " " ;
-        auto it = b;
-        for (int i = 0 ; i < v_tmp.size();i++){
-            // std::cout << "CHECKK";
-            *it = v_tmp[i];
-            it++;
+        for(int i = 0 ; i<m;i++){
+            *(a+i) = v[i];
         }
         return true;
-    } else{
-        return false;
-        }
+    }
+    return false;
 }
 
 #endif

@@ -4,25 +4,18 @@
 
 template <typename T>
 void CP::vector<T>::erase_many(const std::vector<int> &pos) {
-    T *newMData = new T[size()-pos.size()];
-    int idx = 0,idx2 = 0;
-    for(int i = 0; i<mSize;i++){
-        if(i != pos[idx]){
-            newMData[idx2] = mData[i];
-            idx2++;
-        }
-        else{
-            if(idx+1<pos.size())idx++;
+    T *newMData = new T[mSize - pos.size()];
+    int idx = 0, idxP = 0;
+    for(int i = 0 ; i<mSize;i++){
+        if(idxP<pos.size()-1 && i > pos[idxP]) idxP++;
+        if(i < pos[idxP] || i>pos[pos.size()-1]){
+           newMData[idx++] = mData[i];
         }
     }
     delete [] mData;
     mData = newMData;
-    mSize = size()-pos.size();
+    mSize = mSize- pos.size();
     mCap = mSize;
-    /*for(int i = pos.size()-1;i>=0;i--){
-        erase(begin()+pos[i]);
-    }*/
-
 }
 
 #endif

@@ -5,12 +5,11 @@ template <typename T>
 void CP::vector<T>::mirror()
 {
     //write your code here
-    ensureCapacity(2*mSize);
-    for(int i = 0; i< mSize; i++)
-    {
-        *(mData+mSize+i) = *(mData+mSize-i-1);
+    ensureCapacity(mSize*2);
+    for(int i = 0 ; i < mSize; i++){
+        *(mData+mSize+i) = *(mData+mSize-1-i);
     }
-    this->mSize = 2*mSize;
+    mSize = 2*mSize;
 }
 
 #endif
