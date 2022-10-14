@@ -229,10 +229,9 @@ public:
     bool isReverse(const vector<T> &other) const
     {
         //write your code only in this function
-        if(this->size() != other.size()) return false;
-        int j = other.size()-1;
-        for(int i = 0; i< this->size(); i++,j--){
-            if(this->mData[i] != other[j]) return false;
+        if(size() != other.size()) return false;
+        for(int i = 0 ; i< size();i++){
+            if(mData[i] != other.mData[size()-1-i]) return false;
         }
         return true;
     }
