@@ -2,7 +2,8 @@
 #define CP_PRIORITY_QUEUE
 
 #include<iostream>
-#include <stdexcept>
+#include<stdexcept>
+#include<vector>
 
 namespace CP{
     template<typename T,typename Comp = std::less<T>>
@@ -76,6 +77,14 @@ namespace CP{
                 swap(mCap,other.mCap);
                 swap(mLess,other.mLess);
                 return *this;
+            }
+
+            // constructor from vector (logn)
+            priority_queue(std::vector<T> &v,const Comp& c = Comp()):
+                mData(new T[v.size()]()),mSize(v.size()),mCap(v.size()),mLess(c)
+            {
+                for(size_t i = 0;i<mSize;i++) mData[i] = v[i];
+                for(int i = mSize/2-1;i>=0;i--) fixDown(i);
             }
 
             // destructor

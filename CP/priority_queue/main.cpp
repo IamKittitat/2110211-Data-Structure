@@ -196,4 +196,9 @@ int main()
     if (test2()) std::cout << "---------------------- Test 2 OK -----------------------" << std::endl;
     if (test3()) std::cout << "---------------------- Test 3 OK -----------------------" << std::endl;
     if (test4()) std::cout << "---------------------- Test 4 OK -----------------------" << std::endl;
+    vector<int> v = {1,2,4,3,5,6,5,6,6,353};
+    CP::priority_queue<int> ppq(v);
+    while(!ppq.empty()){
+        cout << ppq.top() <<endl; ppq.pop();
+    }
 }
