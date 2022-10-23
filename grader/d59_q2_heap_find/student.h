@@ -20,8 +20,7 @@ int CP::priority_queue<T,Comp>::find_level(T k) const {
   //your code here
     for(int i = mSize-1;i>=0;i--){
         if(mData[i] == k){
-            float ans = log(i+1)/log(2);
-            return floor(ans);
+            return log(i+1)/log(2);
         }
     }
     return -1;
