@@ -23,19 +23,24 @@ template <typename T,typename Comp >
 void CP::priority_queue<T,Comp>::fixDown(size_t idx)
 {
     T tmp = mData[idx];
-    size_t c;
+    size_t c,next;
     while ((c = 4 * idx + 1) < mSize)
     {
-        priority_queue<T> pq; pq.push(mData[c]);
+        /*priority_queue<T> pq; pq.push(mData[c]);
         if (c + 1 < mSize) pq.push(mData[c+1]);
         if (c + 2 < mSize) pq.push(mData[c+2]);
         if (c + 3 < mSize) pq.push(mData[c+3]);
         if(mData[c+1] == pq.top()) c+=1;
         else if(mData[c+2] == pq.top()) c+=2;
         else if(mData[c+3] == pq.top()) c+=3;
-        if ( mLess(mData[c],tmp) ) break;
-        mData[idx] = mData[c];
-        idx = c;
+        if ( mLess(mData[c],tmp) ) break;*/
+        next = c;
+        if (c + 1 < mSize && mLess(mData[next],mData[c+1])) next = c+1;
+        if (c + 2 < mSize && mLess(mData[next],mData[c+2])) next = c+2;
+        if (c + 3 < mSize && mLess(mData[next],mData[c+3])) next = c+3;
+        if(mLess(mData[next],tmp)) break;
+        mData[idx] = mData[next];
+        idx = next;
     }
     mData[idx] = tmp;
 }
