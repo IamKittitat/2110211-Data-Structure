@@ -19,7 +19,7 @@ namespace CP{
             }
             void expand(size_t n){
                 T *newMData = new T[n]();
-                for(size_t i = 0 ; i < mCap ;i++){
+                for(size_t i = 0 ; i < mSize ;i++){
                     newMData[i] = mData[(mFront+i)%mCap];
                 }
                 delete [] mData;
