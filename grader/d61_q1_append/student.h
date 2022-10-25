@@ -4,45 +4,35 @@
 namespace CP {
     template<typename T>
     void stack<T>::appendStack(stack<T> s) {
-        stack<T> tmp_this;
-        stack<T> tmp_s;
+        stack<T> tmp;
         while(!empty()){
-            tmp_this.push(top());
+            tmp.push(top());
             pop();
         }
         while(!s.empty()){
-            tmp_s.push(s.top());
+            tmp.push(s.top());
             s.pop();
         }
-        while(!tmp_s.empty()){
-            push(tmp_s.top());
-            tmp_s.pop();
-        }
-        while(!tmp_this.empty()){
-            push(tmp_this.top());
-            tmp_this.pop();
+        while(!tmp.empty()){
+            push(tmp.top());
+            tmp.pop();
         }
     }
 
     template<typename T>
     void stack<T>::appendQueue(queue<T> q) {
-        stack<T> tmp_this;
-        stack<T> tmp_q;
+        stack<T> tmp;
         while(!empty()){
-            tmp_this.push(top());
+            tmp.push(top());
             pop();
         }
         while(!q.empty()){
-            tmp_q.push(q.front());
+            tmp.push(q.front());
             q.pop();
         }
-        while(!tmp_q.empty()){
-            push(tmp_q.top());
-            tmp_q.pop();
-        }
-        while(!tmp_this.empty()){
-            push(tmp_this.top());
-            tmp_this.pop();
+        while(!tmp.empty()){
+            push(tmp.top());
+            tmp.pop();
         }
     }
 
@@ -53,6 +43,7 @@ namespace CP {
             s.pop();
         }
     }
+
 
     template<typename T>
     void queue<T>::appendQueue(queue<T> q) {

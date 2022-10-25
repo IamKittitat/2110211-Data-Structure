@@ -6,18 +6,15 @@ void member_multiply(vector<int> &v,
                      vector<pair<vector<int>::iterator,int>> &multiply)
 {
 //write your code here
-    vector<int> tmp;
-    int idx = 0;
     sort(multiply.begin(),multiply.end());
-    for(auto it = v.begin() ; it!=v.end();it++){
-        if(it == multiply[idx].first){
-            for(int j=0;j<multiply[idx].second+1;j++) tmp.push_back(*it);
-            idx++;
-        } else{
-            tmp.push_back(*it);
-        }
+    vector<int> ans;
+    int idx = 0;
+    for(int i = 0 ;i <v.size();i++){
+        ans.push_back(v[i]);
+        if(i == multiply[idx].first-v.begin()) for(int j = 0;j<multiply[idx].second;j++)ans.push_back(v[i]);
+        if(i >= multiply[idx].first-v.begin() && idx < multiply.size()) idx++;
     }
-    v = tmp;
+    swap(v,ans);
 }
 int main()
 {

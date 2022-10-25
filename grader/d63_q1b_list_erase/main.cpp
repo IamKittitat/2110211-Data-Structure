@@ -3,27 +3,17 @@
 #include <algorithm>
 #include <set>
 using namespace std;
-
 void list_erase(vector<int> &v, vector<int> &pos)
 {
-    vector<int> tmp;
-    set<int> set_pos;
-    for(auto &x : pos) set_pos.insert(x);
-        for(int i = 0;i<v.size();i++){
-         if(set_pos.find(i) == set_pos.end()){
-            tmp.push_back(v[i]);
-            set_pos.erase(i);
-         }
-     }
-     v = tmp;
-    // vector<int> tmp;
-    // sort(pos.begin(),pos.end());
-    // int tmp_pos = 0;
-    // for (int i = 0; i<v.size();i++){
-    //     if(i != pos[tmp_pos]) tmp.push_back(v[i]);
-    //     else if(i >= pos[tmp_pos] && tmp_pos+1 < pos.size()) tmp_pos++;
-    // }
-    v = tmp;
+//write your code here
+    sort(pos.begin(),pos.end());
+    vector<int> ans(v.size()-pos    .size());
+    int idx = 0,idxp = 0;
+    for(int i = 0 ; i < v.size();i++){
+        if(i != pos[idxp]) ans[idx++] = v[i];
+        if(i >= pos[idxp] && idxp < pos.size()-1) idxp++;
+    }
+    swap(v,ans);
 }
 int main()
 {

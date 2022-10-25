@@ -7,16 +7,17 @@
 template <typename T>
 void CP::queue<T>::move_to_front(size_t pos) {
     //your code here
-    T *newMData = new T[mCap]();
-    newMData[0] = mData[(mFront+pos)%mCap];
-    int idx = 1;
+    T *arr = new T[mSize]();
+    int idx = 0;
+    arr[idx++] = mData[(mFront+pos)%mCap];
     for(int i = 0;i<mSize;i++){
         if(i != pos){
-            newMData[idx++] = mData[(mFront+i)%mCap];
+            arr[idx++] = mData[(mFront+i)%mCap];
         }
     }
-    delete [] mData;
-    mData = newMData;
+    delete []mData;
+    mData = arr;
+    mCap  = mSize;
     mFront = 0;
 }
 
