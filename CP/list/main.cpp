@@ -1,8 +1,9 @@
 #include <iostream>
 #include <assert.h>
 #include "list.h"
-#include <list>
+#include <bits/stdc++.h>
 
+using namespace std;
 
 bool test1() {
   CP::list<int> a;
@@ -77,7 +78,11 @@ bool test3() {
 }
 
 int main() {
-  if (test1()) std::cout << " ------------------------ TEST1 OK -------------------------" << std::endl;
-  if (test2()) std::cout << " ------------------------ TEST2 OK -------------------------" << std::endl;
-  if (test3()) std::cout << " ------------------------ TEST3 OK -------------------------" << std::endl;
+    list<int> l = {1,2,3,4,5};
+    auto it = l.begin();
+    it = next(it,2);
+    cout << *it;
+    if (test1()) std::cout << " ------------------------ TEST1 OK -------------------------" << std::endl;
+    if (test2()) std::cout << " ------------------------ TEST2 OK -------------------------" << std::endl;
+    if (test3()) std::cout << " ------------------------ TEST3 OK -------------------------" << std::endl;
 }
