@@ -1,0 +1,34 @@
+// Your code here
+
+CP::map_bst<node*,int> height;
+
+KeyT getValueOfMostImbalanceNode() {
+    // Your code here
+    height[nullptr] = -1;
+    calHeight(mRoot);
+    // for(std::pair<node*,int> &x : height) std::cout << "C : " << x.first->data.first << " " << x.second << std::endl;
+    KeyT ans;
+    int maxIm = 0;
+    getMaxIm(mRoot,maxIm,ans);
+    std::cout << "Check : " << maxIm << " " << ans;
+    return ans;
+}
+
+void calHeight(node* n){
+    if(n == nullptr) return;
+    calHeight(n->left);
+    calHeight(n->right);
+    height[n] = 1+std::max(height[n->left],height[n->right]);
+}
+
+void getMaxIm(node* n,int &maxIm,KeyT &ans){
+    if(n == nullptr) return;
+    int lh = height[n->left];
+    int rh = height[n->right];
+    int imbalance = abs(lh-rh);
+    if(imbalance > maxIm){
+        maxIm = imbalance;
+        ans = n->data.first;
+    }
+}
+
