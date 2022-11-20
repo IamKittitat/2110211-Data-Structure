@@ -6,11 +6,14 @@ template <typename T>
 void CP::list<T>::merge(CP::list<CP::list<T>> &ls) {
   //write your code here
     for(CP::list<T> &l : ls){
-        mSize+=l.size();
-        mHeader->prev->next = l.mHeader->next; //pink
-        l.mHeader->next->prev = mHeader->prev; //red
-        mHeader->prev = l.mHeader->prev; //yellow
-        l.mHeader->prev->next = mHeader; //brown
+        if(l.empty()) continue;
+        node *hd1 = mHeader,*l1 = mHeader->prev,*hd2 = l.mHeader,*f2 = l.mHeader->next,*l2 = l.mHeader->prev;
+        mSize += l.size();
+
+        hd1->prev = l2;
+        l1->next = f2;
+        f2->prev = l1;
+        l2->next = hd1;
 
         l.mHeader->next = l.mHeader;
         l.mHeader->prev = l.mHeader;
