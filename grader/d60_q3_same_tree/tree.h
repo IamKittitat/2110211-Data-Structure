@@ -36,27 +36,13 @@ public:
     }
     bool isSameBinaryTree(Tree& t) {
         // Insert your code here
-        if(mRoot == NULL && t.mRoot == NULL) return true;
-        return isSameBinaryTree(mRoot,t.mRoot);
+        return isSameTree(mRoot,t.mRoot);
     }
-    bool  isSameBinaryTree(Node* a,Node* b){
-        // Preorder Travesal!
-        /*if(a->data == b->data){
-            bool lc=true,rc=true;
-            if(a->left != NULL && b->left != NULL) lc = isSameBinaryTree(a->left,b->left);
-            if(a->right != NULL && b->right != NULL) rc = isSameBinaryTree(a->right,b->right);
-
-            if(!lc || !rc) return false;
-            return true;
-        }
-        return false;*/
-        if(a == nullptr && b == nullptr) return true;
-        if(a == nullptr || b == nullptr) return false;
-        bool c1,c2,c3;
-        c1 = a->data == b->data;
-        c2 = isSameBinaryTree(a->left, b->left);
-        c3 = isSameBinaryTree(a->right, b->right);
-        return c1 && c2 && c3;
+    // You can also put your code here
+    bool isSameTree(Node *a,Node *b){
+        if(a == NULL && b == NULL) return true;
+        if(a->data == b->data && isSameTree(a->left,b->left) && isSameTree(a->right,b->right)) return true;
+        return false;
     }
 
 protected:
