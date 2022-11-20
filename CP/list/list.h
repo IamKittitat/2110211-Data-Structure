@@ -14,67 +14,65 @@ namespace CP{
                     T data;
                     node *prev,*next;
 
-                    node(): data(T()),prev(this),next(this){}
-                    node(const T& data,node* prev,node* next): data(data),prev(prev),next(next){}
+                    node():data(T()),prev(this),next(this){}
+                    node(const T& data,node *prev,node *next): data(data),prev(prev),next(next){}
             };
-
             class list_iterator{
                 friend class list;
                 protected:
                     node* ptr;
                 public:
-                    list_iterator(): ptr(NULL){}
+                    list_iterator():ptr(NULL){};
                     list_iterator(node* other): ptr(other){}
 
                     list_iterator& operator++(){
-                        ptr =  ptr->next;
+                        ptr = ptr->next;
                         return *this;
                     }
                     list_iterator& operator--(){
-                        ptr =  ptr->prev;
+                        ptr = ptr->prev;
                         return *this;
                     }
-                    list_iterator operator++(int) {
+                    list_iterator& operator++(int){
                         list_iterator tmp(*this);
                         operator++();
                         return tmp;
                     }
-                    list_iterator operator--(int) {
+                    list_iterator& operator--(int){
                         list_iterator tmp(*this);
                         operator--();
                         return tmp;
                     }
-
                     T& operator*(){return ptr->data;}
-                    T* operator&(){return &(ptr->data);}
-                    bool operator==(const list_iterator& other){return ptr == other.ptr;}
-                    bool operator!=(const list_iterator& other){return ptr != other.ptr;}
+                    T* operator->(){return &(ptr->data);}
+                    bool operator==(const list_iterator& other) { return other.ptr == ptr; }
+                    bool operator!=(const list_iterator& other) { return other.ptr != ptr; }
             };
-
         public:
             typedef list_iterator iterator;
-
         protected:
-            node *mHeader;
+            node* mHeader;
             size_t mSize;
 
         public:
             //-------------- constructor & copy operator ----------
-
             // default constructor
-            list(): mHeader(new node()),mSize(0){}
+            list():mHeader(new node()),mSize(0){}
 
             // copy constructor
-            list(list<T> &a): mHeader(new node()),mSize(0){
-                for (auto it = a.begin();it!=a.end();it++) {
-                    push_back(*it);
-                  }
+            list(list<T>& a){
+                mHeader = new node();
+                mSize = 0;
+                for(auto &x : a){
+                    push_back(x);
+                }
             }
+
             // copy assignment operator using copy-and-swap idiom
-            list<T>& operator=(list<T> other){
+            list<T>& operator=(list<T> a){
                 using std::swap;
-                swap(mHeader,other.mHeader);
-                swap(mSize,other.mSize);
+                swap(mHeader,a.mHeader);
+                swap(mSize,a.mSize);
                 return *this;
             }
 
@@ -85,11 +83,10 @@ namespace CP{
 
             //------------- capacity function -------------------
             bool empty() const {
-              return mSize == 0;
+                return mSize == 0;
             }
-
-            size_t size() const {
-              return mSize;
+            size_t size() const{
+                return mSize;
             }
 
             //----------------- iterator ---------------
@@ -99,6 +96,7 @@ namespace CP{
             iterator end(){
                 return iterator(mHeader);
             }
+
             //----------------- access -----------------
             T& front(){
                 return mHeader->next->data;
@@ -107,36 +105,36 @@ namespace CP{
                 return mHeader->prev->data;
             }
             //----------------- modifier -------------
-            void push_back(const T& element){
-                insert(end(),element);
-            }
             void push_front(const T& element){
                 insert(begin(),element);
             }
-            void pop_back(){
-                erase(iterator(mHeader->prev));
+            void push_back(const T& element){
+                insert(end(),element);
             }
             void pop_front(){
                 erase(begin());
             }
+            void pop_back(){
+                erase(iterator(mHeader->prev));
+            }
 
             iterator insert(iterator it,const T& element){
-                node *n = new node(element,it.ptr->prev,it.ptr);
+                node* n = new node(element,it.ptr->prev,it.ptr);
                 it.ptr->prev->next = n;
                 it.ptr->prev = n;
                 mSize++;
                 return iterator(n);
             }
             iterator erase(iterator it){
-                iterator tmp(it.ptr->next);
+                auto tmp = it.ptr->next;
                 it.ptr->prev->next = it.ptr->next;
                 it.ptr->next->prev = it.ptr->prev;
                 delete it.ptr;
                 mSize--;
                 return tmp;
             }
-            void clear() {
-                while (mSize > 0) erase(begin());
+            void clear(){
+                while(mSize > 0) erase(begin());
             }
             void print() {
                 std::cout << " Size = " << mSize << std::endl;
@@ -149,7 +147,10 @@ namespace CP{
                 }
             }
 
+
+
     };
 }
+
 
 #endif // CP_LIST
