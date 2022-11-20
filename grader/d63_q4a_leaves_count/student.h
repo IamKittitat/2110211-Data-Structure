@@ -9,12 +9,9 @@ template <typename KeyT,
           typename MappedT,
           typename CompareT>
 size_t CP::map_bst<KeyT,MappedT,CompareT>::leaves_count(node* n) {
-    if(n==NULL) return 0;
+    if(n == NULL) return 0;
     if(n->left == NULL && n->right == NULL) return 1;
-    size_t left = 0,right = 0;
-    if(n->left != NULL) left = leaves_count(n->left);
-    if(n->right != NULL) right = leaves_count(n->right);
-    return left + right;
+    return leaves_count(n->left) + leaves_count(n->right);
 }
 
 
@@ -22,8 +19,8 @@ template <typename KeyT,
           typename MappedT,
           typename CompareT>
 size_t CP::map_bst<KeyT,MappedT,CompareT>::leaves_count() {
+  return leaves_count(mRoot);
   //write your code here
-    return leaves_count(mRoot);
 }
 
 
