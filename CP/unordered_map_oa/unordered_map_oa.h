@@ -256,7 +256,7 @@ namespace CP{
                 std::pair<iterator,bool> result;
                 const KeyT& key = val.first;
                 size_t pos = find_position(key);
-                if(mBuckets[pos].available()){
+                if(mBuckets[pos].empty()){
                     BucketIterator it = insert_to_position(val,pos);
                     result.first = iterator(it,mBuckets.end());
                     result.second = true;
