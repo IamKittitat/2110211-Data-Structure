@@ -18,8 +18,17 @@ int main() {
 
     cout << "Preorder traversal of the ScapeGoat tree\n";
     sgt.preorder();
-    cout << "\nPostorder traversal of the ScapeGoat tree\n";
+    cout << "Postorder traversal of the ScapeGoat tree\n";
     sgt.postorder();
-    cout << "\nInorder traversal of the ScapeGoat tree\n";
+    cout << "Inorder traversal of the ScapeGoat tree\n";
+    sgt.inorder();
+
+    sgt.erase(3); sgt.erase(3.5); sgt.erase(7); sgt.erase(9);
+
+    cout << "Preorder traversal of the ScapeGoat tree\n";
+    sgt.preorder();
+    cout << "Postorder traversal of the ScapeGoat tree\n";
+    sgt.postorder();
+    cout << "Inorder traversal of the ScapeGoat tree\n";
     sgt.inorder();
 }

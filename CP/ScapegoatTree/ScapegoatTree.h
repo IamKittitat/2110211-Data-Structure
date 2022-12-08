@@ -68,12 +68,13 @@ namespace CP{
             void rebuildTree(node *n){
                 std::vector<node*> nodes;
                 storeNodes(n,nodes);
-                node *parent = n->parent == NULL ? mRoot : n->parent;
+                node *parent = n->parent == NULL ? NULL : n->parent;
 
                 // Constructs BST from nodes[]
                 int amount = nodes.size();
-                node *new_subtree_root = genTree(n,nodes,0,amount-1);
+                node *new_subtree_root = genTree(parent,nodes,0,amount-1);
                 child_link(parent,new_subtree_root->data.first) = new_subtree_root;
+                mMaxNode = mSize;
             }
 
             void storeNodes(node *n,std::vector<node*> &nodes)
@@ -90,6 +91,7 @@ namespace CP{
                 int mid = (l+r) / 2;
 
                 node *n = nodes[mid];
+                if(parent != NULL) n->parent = parent;
                 n->left  = genTree(n,nodes, l, mid-1);
                 n->right = genTree(n,nodes, mid+1, r);
                 return n;
@@ -159,13 +161,15 @@ namespace CP{
                 int depth = n_d.second;
                 bool not_found = (n == NULL);
                 if(not_found){
+                    std::cout << "Insert " << val.first << std::endl;
                     n = new node(val,NULL,NULL,parent);
                     child_link(parent,val.first) = n;
                     mSize++;
+                    mMaxNode = std::max(mSize,mMaxNode);
                     if(depth > std::floor(log(mSize)/log((float)1/(float)mAlpha))){
+                        std::cout << "REBALANCE FROM INSERT\n";
                         node *p = n->parent;
                         while (nodeSize(p) <= mAlpha*nodeSize(p->parent)) p = p->parent;
-                        std::cout <<"depth " << depth << " " << n->data.first << " " << p->data.first << std::endl;
                         rebuildTree(p->parent);
                     }
                     return 1;
@@ -173,20 +177,23 @@ namespace CP{
                 return not_found;
             }
 
-            /*size_t erase(const KeyT &key){
+            size_t erase(const KeyT &key){
                 if(mRoot == NULL) return 0;
 
                 node *parent = NULL;
-                node *n = find_node(key,mRoot,parent);
+                std::pair<node*,int> n_d;
+                n_d = find_node(key,mRoot,parent);
+                node *n = n_d.first;
                 if(n == NULL) return 0;
+                std::cout << "Erase " << key << std::endl;
                 if(n->left != NULL && n->right != NULL){
-                    node *min = find_min_node(ptr->right);
+                    node *min = find_min_node(n->right);
                     node * &link = child_link(min->parent, min->data.first);
                     link = (min->left == NULL) ? min->right : min->left;
                     if (link != NULL) link->parent = min->parent;
-                    std::swap(ptr->data.first, min->data.first);
-                    std::swap(ptr->data.second, min->data.second);
-                    ptr = min; // we are going to delete this node instead
+                    std::swap(n->data.first, min->data.first);
+                    std::swap(n->data.second, min->data.second);
+                    n = min; // we are going to delete this node instead
                 } else{
                     node * &link = child_link(n->parent, key);
                     link = (n->left == NULL) ? n->right : n->left;
@@ -194,17 +201,24 @@ namespace CP{
                 }
                 delete n;
                 mSize--;
+                if(mSize <= mAlpha*mMaxNode){
+                    std::cout << "REBALANCE FROM DELETE\n";
+                    rebuildTree(mRoot);
+                }
                 return 1;
-            }*/
+            }
 
             void preorder(){
                 preorder(mRoot);
+                std::cout << "\n";
             }
             void inorder(){
                 inorder(mRoot);
+                std::cout << "\n";
             }
             void postorder(){
                 postorder(mRoot);
+                std::cout << "\n";
             }
 
             void preorder(node *n){
