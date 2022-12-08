@@ -205,13 +205,13 @@ namespace CP{
                 node *n = find_node(key,mRoot,parent);
                 if(n == NULL) return 0;
                 if(n->left != NULL && n->right != NULL){
-                    node *min = find_min_node(ptr->right);
+                    node *min = find_min_node(n->right);
                     node * &link = child_link(min->parent, min->data.first);
                     link = (min->left == NULL) ? min->right : min->left;
                     if (link != NULL) link->parent = min->parent;
-                    std::swap(ptr->data.first, min->data.first);
-                    std::swap(ptr->data.second, min->data.second);
-                    ptr = min; // we are going to delete this node instead
+                    std::swap(n->data.first, min->data.first);
+                    std::swap(n->data.second, min->data.second);
+                    n = min; // we are going to delete this node instead
                 } else{
                     node * &link = child_link(n->parent, key);
                     link = (n->left == NULL) ? n->right : n->left;
