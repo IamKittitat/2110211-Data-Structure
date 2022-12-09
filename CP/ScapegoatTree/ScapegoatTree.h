@@ -1,6 +1,12 @@
 #ifndef CP_MAP_SGT
 #define CP_MAP_SGT
 
+/*
+6431304521 Kittitat Tuntisak
+6431313121 Thamon Nantasen
+6431315421 Naphat Wareesawetsuwan
+*/
+
 #include<vector>
 #include<cmath>
 
@@ -16,7 +22,8 @@ namespace CP{
                     node *left,*right,*parent;
 
                     node():data(ValueT()),left(NULL),right(NULL),parent(NULL){}
-                    node(const ValueT& data,node *left,node *right,node *parent):data(data),left(left),right(right),parent(parent){}
+                    node(const ValueT& data,node *left,node *right,node *parent):
+                        data(data),left(left),right(right),parent(parent){}
             };
             node *mRoot;
             size_t mSize;
@@ -59,24 +66,28 @@ namespace CP{
                 delete n;
             }
 
+            // Find number of nodes in subtree
             float nodeSize(node *n)
             {
                 if (n == NULL) return 0;
                 return 1 + nodeSize(n->left) + nodeSize(n->right);
             }
 
+            // Rebuild tree
             void rebuildTree(node *n){
                 std::vector<node*> nodes;
                 storeNodes(n,nodes);
                 node *parent = n->parent == NULL ? NULL : n->parent;
 
-                // Constructs BST from nodes[]
+                // Constructs BST from nodes
                 int amount = nodes.size();
                 node *new_subtree_root = genTree(parent,nodes,0,amount-1);
                 child_link(parent,new_subtree_root->data.first) = new_subtree_root;
+                // Fixed mMaxNode every rebuilding.
                 mMaxNode = mSize;
             }
 
+            // Inorder Traversal storing all nodes in vector.
             void storeNodes(node *n,std::vector<node*> &nodes)
             {
                 if(n==NULL) return;
@@ -86,6 +97,7 @@ namespace CP{
                 storeNodes(n->right, nodes);
             }
 
+            // Recursively generate new tree.
             node* genTree(node *parent,std::vector<node*> nodes,int l,int r){
                 if (l > r) return NULL;
                 int mid = (l+r) / 2;
@@ -96,8 +108,10 @@ namespace CP{
                 n->right = genTree(n,nodes, mid+1, r);
                 return n;
             }
+
+
         public:
-            //-------------- constructor & copy operator ----------
+            //-------------- constructor & copy operator --------------
 
             // default constructor
             map_sgt(const CompareT& c = CompareT()): mRoot(NULL),mSize(0),mMaxNode(0),mLess(c),mAlpha((float)2/(float)3){}
